@@ -1,4 +1,5 @@
-<?php namespace Riuson\EveIGB;
+<?php
+namespace Riuson\EveIGB;
 
 use System\Classes\PluginBase;
 
@@ -16,11 +17,28 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => 'EveIGB',
+            'name' => 'EveIGB',
             'description' => 'Some methods for EVE Online in-game browser',
-            'author'      => 'Riuson',
-            'icon'        => 'icon-leaf'
+            'author' => 'Riuson',
+            'icon' => 'icon-leaf'
         ];
     }
 
+    public function registerMarkupTags()
+    {
+        return [
+            'filters' => [
+                'evelinks' => [
+                    'Riuson\EveIGB\Classes\LinksParser',
+                    'blogpostParseLinks'
+                ]
+            ],
+            'functions' => [
+                'evelink' => [
+                    'Riuson\EveIGB\Classes\LinksParser',
+                    'parse'
+                ]
+            ]
+        ];
+    }
 }
